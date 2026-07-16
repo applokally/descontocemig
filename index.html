@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover"
+    >
+
+    <meta
+        name="description"
+        content="Economize até 15% sobre a parcela elegível do consumo de energia da sua conta CEMIG. Cadastro gratuito e sem instalação de placas solares."
+    >
+
+    <meta name="theme-color" content="#00422f">
+
+    <title>Desconto CEMIG | Economize até 15%</title>
+
+    <link rel="icon" type="image/png" href="assets/images/logo-atl.png">
+    <link rel="apple-touch-icon" href="assets/images/logo-atl.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header" id="inicio">
+        <div class="header-container">
+            <a
+                class="brand"
+                href="#inicio"
+                aria-label="Voltar para o início"
+            >
+                <img
+                    class="brand-logo"
+                    src="assets/images/logo-atl.png"
+                    alt="ATL Energy"
+                >
+
+                <span class="brand-fallback" aria-hidden="true">
+                    ATL <strong>Energy</strong>
+                </span>
+            </a>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="hero" aria-labelledby="hero-title">
+
+            <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+            >
+                <source
+                    src="assets/videos/fazenda_solar.mp4"
+                    type="video/mp4"
+                >
+            </video>
+
+            <div class="hero-overlay" aria-hidden="true"></div>
+
+            <div class="hero-container">
+
+                <div class="hero-copy">
+
+                    <p class="hero-eyebrow">
+                        Economia para Minas Gerais
+                    </p>
+
+                    <h1 id="hero-title">
+                        <span>Economia de até</span>
+                        <strong>15% para os mineiros</strong>
+                    </h1>
+
+                    <p class="hero-description">
+                        Reduza os gastos com o consumo de energia sem instalar
+                        placas solares, sem obras e sem alterar sua instalação
+                        elétrica.
+                    </p>
+
+                    <div class="hero-highlights">
+                        <span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="m5 12 4 4L19 6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.4"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            Cadastro gratuito
+                        </span>
+
+                        <span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="m5 12 4 4L19 6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.4"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            Processo digital
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <aside
+                    class="hero-card"
+                    id="cadastro"
+                    aria-labelledby="hero-card-title"
+                >
+
+                    <div
+                        class="profile-step"
+                        id="profile-step"
+                    >
+                        <h2 id="hero-card-title">
+                            Desconto legal pela
+                            <strong>Lei 14.300/2022</strong>
+                        </h2>
+
+                        <button
+                            class="law-modal-trigger"
+                            id="law-modal-trigger"
+                            type="button"
+                            aria-haspopup="dialog"
+                            aria-controls="law-modal"
+                        >
+                            Entenda o que diz a lei
+                        </button>
+
+                        <p class="card-description">
+                            Selecione o seu perfil de consumo
+                        </p>
+
+                        <div class="profile-options">
+                            <button
+                                class="profile-button"
+                                type="button"
+                                data-profile="Residencial"
+                            >
+                                <span class="profile-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M3 11.2 12 4l9 7.2v8.3a.5.5 0 0 1-.5.5h-5.3v-5.5H8.8V20H3.5a.5.5 0 0 1-.5-.5v-8.3Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </span>
+
+                                <span>
+                                    <strong>Residencial</strong>
+                                    <small>Para sua casa</small>
+                                </span>
+
+                                <svg
+                                    class="profile-arrow"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="m9 5 7 7-7 7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+
+                            <button
+                                class="profile-button"
+                                type="button"
+                                data-profile="Empresarial"
+                            >
+                                <span class="profile-icon">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path
+                                            d="M4 21V5.5A1.5 1.5 0 0 1 5.5 4h8A1.5 1.5 0 0 1 15 5.5V9h3.5a1.5 1.5 0 0 1 1.5 1.5V21h-6v-4H10v4H4Zm3-13h2V6H7v2Zm4 0h2V6h-2v2Zm-4 4h2v-2H7v2Zm4 0h2v-2h-2v2Zm5 1h2v-2h-2v2Zm0 4h2v-2h-2v2Z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                </span>
+
+                                <span>
+                                    <strong>Empresarial</strong>
+                                    <small>Para sua empresa</small>
+                                </span>
+
+                                <svg
+                                    class="profile-arrow"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        d="m9 5 7 7-7 7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div
+                        class="calculator-step"
+                        id="calculator-step"
+                        hidden
+                    >
+                        <button
+                            class="form-back-button"
+                            type="button"
+                            id="calculator-back-button"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="m15 18-6-6 6-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            Alterar perfil
+                        </button>
+
+                        <p class="card-kicker">
+                            Simulação gratuita
+                        </p>
+
+                        <h2>
+                            Qual o valor da sua conta de luz?
+                        </h2>
+
+                        <p class="calculator-description">
+                            Insira o valor médio mensal da sua conta de energia.
+                        </p>
+
+                        <p class="selected-profile-label">
+                            Perfil selecionado:
+                            <strong id="calculator-profile-text"></strong>
+                        </p>
+
+                        <div class="bill-value-field">
+                            <label for="bill-value">
+                                Valor da conta de luz
+                            </label>
+
+                            <div class="currency-input">
+                                <span>R$</span>
+
+                                <input
+                                    type="text"
+                                    id="bill-value"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                    placeholder="500,00"
+                                    aria-describedby="bill-value-help bill-value-error"
+                                >
+                            </div>
+
+                            <small id="bill-value-help">
+                                Valor mínimo para simulação: R$ 160,00
+                            </small>
+
+                            <small
+                                class="calculator-error"
+                                id="bill-value-error"
+                            ></small>
+                        </div>
+
+                        <div
+                            class="savings-result"
+                            id="savings-result"
+                            aria-live="polite"
+                        >
+                            <div class="savings-comparison">
+                                <div class="savings-comparison-item">
+                                    <span>Valor da fatura</span>
+                                    <strong id="bill-total-display">
+                                        R$ 0,00
+                                    </strong>
+                                </div>
+
+                                <div
+                                    class="savings-comparison-arrow"
+                                    aria-hidden="true"
+                                >
+                                    →
+                                </div>
+
+                                <div class="savings-comparison-item savings-comparison-highlight">
+                                    <span>Após desconto ATL</span>
+                                    <strong id="estimated-final-value">
+                                        R$ 0,00
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="calculator-disclaimer">
+                            Aqui você confere uma estimativa de quanto pode
+                            economizar com a ATL Energy. O valor definitivo será
+                            confirmado após a análise da conta. Iluminação
+                            pública, impostos, taxas, multas, juros, serviços e
+                            outros itens da fatura podem não receber desconto.
+                        </p>
+
+                        <button
+                            class="calculator-continue-button"
+                            id="calculator-continue-button"
+                            type="button"
+                        >
+                            Continuar cadastro
+
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="m9 5 7 7-7 7"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+
+                    <div
+                        class="form-step"
+                        id="form-step"
+                        hidden
+                    >
+                        <button
+                            class="form-back-button"
+                            type="button"
+                            id="form-back-button"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="m15 18-6-6 6-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            Voltar à simulação
+                        </button>
+
+                        <p class="card-kicker">
+                            Cadastro gratuito
+                        </p>
+
+                        <h2>
+                            Preencha seus dados
+                        </h2>
+
+                        <p class="selected-profile-label">
+                            Perfil selecionado:
+                            <strong id="selected-profile-text"></strong>
+                        </p>
+
+                        <div class="form-savings-summary">
+                            <span>Economia mensal estimada</span>
+
+                            <strong id="form-monthly-savings">
+                                R$ 0,00
+                            </strong>
+                        </div>
+
+                        <form
+                            class="lead-form"
+                            id="lead-form"
+                            novalidate
+                        >
+                            <input
+                                type="hidden"
+                                name="perfil"
+                                id="profile-input"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="valor_conta"
+                                id="bill-value-input"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="economia_mensal"
+                                id="monthly-savings-input"
+                            >
+
+                            <input
+                                type="hidden"
+                                name="economia_anual"
+                                id="annual-savings-input"
+                            >
+
+                            <div class="form-field">
+                                <label for="full-name">
+                                    Nome completo
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="full-name"
+                                    name="nome"
+                                    autocomplete="name"
+                                    placeholder="Digite seu nome completo"
+                                    required
+                                    minlength="3"
+                                >
+
+                                <small class="field-error"></small>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="email">
+                                    E-mail
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autocomplete="email"
+                                    inputmode="email"
+                                    placeholder="nome@exemplo.com"
+                                    required
+                                >
+
+                                <small class="field-error"></small>
+                            </div>
+
+                            <div class="form-field">
+                                <label
+                                    for="document"
+                                    id="document-label"
+                                >
+                                    CPF
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="document"
+                                    name="documento"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                    placeholder="000.000.000-00"
+                                    required
+                                >
+
+                                <small class="field-error"></small>
+                            </div>
+
+                            <label class="privacy-checkbox">
+                                <input
+                                    type="checkbox"
+                                    id="privacy-consent"
+                                    required
+                                >
+
+                                <span>
+                                    Li e concordo com a
+                                    <a href="politica-de-privacidade.html">
+                                        Política de Privacidade
+                                    </a>.
+                                </span>
+                            </label>
+
+                            <button
+                                class="form-submit-button"
+                                type="submit"
+                            >
+                                Iniciar cadastro gratuito
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="m9 5 7 7-7 7"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                </svg>
+                            </button>
+
+                            <p class="form-security-note">
+                                Seus dados serão utilizados somente para iniciar
+                                seu atendimento e verificar a elegibilidade.
+                            </p>
+                        </form>
+                    </div>
+
+                </aside>
+
+            </div>
+
+            <div class="hero-bottom-fade" aria-hidden="true"></div>
+
+        </section>
+
+
+        <section
+            class="discount-path-section"
+            aria-labelledby="discount-path-title"
+        >
+            <div class="discount-path-container">
+
+                <div class="discount-path-heading">
+                    <h2 id="discount-path-title">
+                        Como o desconto chega até sua casa?
+                    </h2>
+                </div>
+
+                <picture class="discount-path-picture">
+                    <source
+                        media="(max-width: 700px)"
+                        srcset="assets/images/caminho-vertical-celularv3.png"
+                    >
+
+                    <img
+                        class="discount-path-image"
+                        src="assets/images/caminho-horizontal-desktop.png"
+                        alt="Caminho que mostra como o desconto de energia chega até a casa ou empresa do consumidor"
+                        loading="lazy"
+                        decoding="async"
+                    >
+                </picture>
+
+            </div>
+        </section>
+
+
+        <section
+            class="audience-section"
+            aria-labelledby="audience-title"
+        >
+            <div class="audience-container">
+
+                <div class="audience-heading">
+                    <p class="section-kicker">
+                        Quem atendemos
+                    </p>
+
+                    <h2 id="audience-title">
+                        Economia para diferentes perfis de consumo
+                    </h2>
+
+                    <p>
+                        Nossa solução atende consumidores residenciais,
+                        condomínios, empresas e pequenos negócios que desejam
+                        reduzir os gastos mensais com energia.
+                    </p>
+                </div>
+
+                <div class="audience-grid">
+
+                    <article class="audience-card">
+                        <div class="audience-card-image">
+                            <img
+                                src="assets/images/residencias.png"
+                                alt="Residência atendida pela solução de economia de energia"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </div>
+
+                        <div class="audience-card-content">
+                            <span class="audience-card-number">01</span>
+
+                            <h3>Residências</h3>
+
+                            <p>
+                                Para famílias que desejam economizar todos os
+                                meses sem instalar placas solares ou realizar
+                                alterações no imóvel.
+                            </p>
+                        </div>
+                    </article>
+
+
+                    <article class="audience-card">
+                        <div class="audience-card-image">
+                            <img
+                                src="assets/images/condominio-new.png"
+                                alt="Condomínio atendido pela solução de economia de energia"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </div>
+
+                        <div class="audience-card-content">
+                            <span class="audience-card-number">02</span>
+
+                            <h3>Condomínios</h3>
+
+                            <p>
+                                Uma alternativa para reduzir os custos de
+                                energia das áreas comuns, conforme a análise da
+                                unidade consumidora.
+                            </p>
+                        </div>
+                    </article>
+
+
+                    <article class="audience-card">
+                        <div class="audience-card-image">
+                            <img
+                                src="assets/images/mercearia.png"
+                                alt="Pequeno negócio atendido pela solução de economia de energia"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                        </div>
+
+                        <div class="audience-card-content">
+                            <span class="audience-card-number">03</span>
+
+                            <h3>Empresas e pequenos negócios</h3>
+
+                            <p>
+                                Para estabelecimentos que precisam diminuir
+                                despesas operacionais e tornar o consumo de
+                                energia mais econômico.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <div class="audience-eligibility">
+
+                    <div class="eligibility-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M13.4 2 5.8 13.1h5L9.9 22l8.3-12.2h-5.1L13.4 2Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </div>
+
+                    <div class="eligibility-content">
+                        <h3>Perfil ideal para participar</h3>
+
+                        <p>
+                            A solução é indicada para unidades com conta mensal
+                            acima de R$ 200,00, instalação bifásica ou trifásica
+                            e enquadramento no Grupo B, correspondente ao
+                            fornecimento em baixa tensão. A ATL Energy
+                            proporciona acesso à energia sustentável e economia
+                            recorrente na parcela elegível do consumo, sem
+                            investimento em equipamentos e sem taxa de adesão.
+                            A contratação está sujeita à análise da conta e aos
+                            critérios de elegibilidade.
+                        </p>
+                    </div>
+
+                    <a
+                        class="eligibility-button js-scroll-to-registration"
+                        href="#cadastro"
+                    >
+                        Verificar meu perfil
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="m9 5 7 7-7 7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section
+            class="journey-section"
+            aria-labelledby="journey-title"
+        >
+            <div class="journey-container">
+
+                <div class="journey-heading">
+                    <p class="section-kicker">
+                        Jornada de adesão
+                    </p>
+
+                    <h2 id="journey-title">
+                        Um processo simples, seguro e acompanhado
+                    </h2>
+
+                    <p>
+                        Você conta com o suporte de um especialista da
+                        ATL Energy pelo WhatsApp durante as etapas do cadastro,
+                        envio dos documentos e conclusão da adesão.
+                    </p>
+                </div>
+
+
+                <div class="journey-grid">
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">01</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/Group-1000004176.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Selecione seu perfil</h3>
+
+                        <p>
+                            Escolha se o cadastro será realizado para uma
+                            unidade residencial ou empresarial.
+                        </p>
+                    </article>
+
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">02</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/Group-1000004177.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Simule sua economia</h3>
+
+                        <p>
+                            Informe o valor médio da conta para visualizar uma
+                            estimativa mensal e anual de economia.
+                        </p>
+                    </article>
+
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">03</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/Group.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Envie sua conta de energia</h3>
+
+                        <p>
+                            Pelo WhatsApp, um especialista da ATL Energy
+                            solicitará uma foto legível da sua conta de luz
+                            mais recente.
+                        </p>
+                    </article>
+
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">04</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/card-green-ico.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Envie seu documento</h3>
+
+                        <p>
+                            O especialista solicitará um documento oficial
+                            com foto e CPF para concluir o cadastro.
+                        </p>
+                    </article>
+
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">05</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/group5.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Validamos as informações</h3>
+
+                        <p>
+                            Nossa equipe confere os documentos e verifica
+                            se a unidade consumidora atende aos critérios
+                            de elegibilidade.
+                        </p>
+                    </article>
+
+
+                    <article class="journey-card">
+                        <div class="journey-card-top">
+                            <span class="journey-number">06</span>
+
+                            <div class="journey-icon">
+                                <img
+                                    src="assets/icons/pencil-green.png"
+                                    alt=""
+                                    aria-hidden="true"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </div>
+
+                        <h3>Assine o Termo de Adesão</h3>
+
+                        <p>
+                            Após a aprovação, o Termo de Adesão será enviado
+                            ao seu e-mail para assinatura eletrônica.
+                        </p>
+                    </article>
+
+                </div>
+
+
+                <div class="journey-specialist-box">
+
+                    <div class="journey-specialist-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 3a7 7 0 0 0-7 7v3a3 3 0 0 0 3 3h1v-6H7a5 5 0 1 1 10 0h-2v6h1.4A4.6 4.6 0 0 1 12 19.5h-1.2a1.5 1.5 0 1 0 0 3H12a7.6 7.6 0 0 0 7.5-6.5A3 3 0 0 0 21 13v-3a9 9 0 0 0-9-9v2Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </div>
+
+                    <div class="journey-specialist-content">
+                        <p class="journey-specialist-kicker">
+                            Atendimento humano
+                        </p>
+
+                        <h3>
+                            Um especialista da ATL Energy acompanha você
+                            pelo WhatsApp
+                        </h3>
+
+                        <p>
+                            Após o envio dos dados iniciais, um especialista
+                            continuará o atendimento pelo WhatsApp, explicará
+                            cada etapa, solicitará os documentos necessários e
+                            acompanhará seu cadastro até a disponibilização do
+                            Termo de Adesão.
+                        </p>
+                    </div>
+
+                    <a
+                        class="journey-whatsapp-button js-scroll-to-registration"
+                        href="#cadastro"
+                    >
+                        Falar com um especialista
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="m9 5 7 7-7 7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section
+            class="faq-section"
+            id="perguntas-frequentes"
+            aria-labelledby="faq-title"
+        >
+            <div class="faq-container">
+
+                <div class="faq-heading">
+                    <p class="section-kicker">
+                        Dúvidas frequentes
+                    </p>
+
+                    <h2 id="faq-title">
+                        Tire suas dúvidas antes de iniciar
+                    </h2>
+
+                    <p>
+                        Entenda como funciona a energia solar por assinatura,
+                        o processo de adesão e a compensação dos créditos na
+                        sua conta.
+                    </p>
+                </div>
+
+
+                <div class="faq-list">
+
+                    <article class="faq-item is-open">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="true"
+                            >
+                                <span class="faq-number">01.</span>
+
+                                <span class="faq-question-text">
+                                    O que é a ATL Energy?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>
+                                    A ATL Energy atua conectando consumidores
+                                    residenciais, condomínios e empresas à
+                                    modalidade de geração distribuída
+                                    compartilhada.
+                                </p>
+
+                                <p>
+                                    Por meio de usinas solares parceiras, são
+                                    disponibilizados créditos de energia que
+                                    podem ser compensados na unidade
+                                    consumidora, conforme os critérios de
+                                    elegibilidade e as condições do Termo de
+                                    Adesão.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">02.</span>
+
+                                <span class="faq-question-text">
+                                    O que é energia solar remota ou por assinatura?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    É uma modalidade de geração distribuída na
+                                    qual a energia é produzida em uma usina
+                                    solar localizada fora do imóvel do cliente.
+                                </p>
+
+                                <p>
+                                    Essa energia é injetada na rede elétrica da
+                                    distribuidora e convertida em créditos que
+                                    podem ser compensados na unidade
+                                    consumidora participante, sem necessidade
+                                    de instalar placas solares no endereço.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">03.</span>
+
+                                <span class="faq-question-text">
+                                    Preciso instalar placas solares?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    Não. A geração acontece em usinas solares
+                                    parceiras. Não são necessárias obras,
+                                    equipamentos ou alterações na instalação
+                                    elétrica do imóvel.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">04.</span>
+
+                                <span class="faq-question-text">
+                                    Existe algum custo para aderir?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    Não há investimento em equipamentos, obras
+                                    ou taxa de adesão. A contratação depende da
+                                    análise da conta de energia, da aprovação
+                                    dos documentos e das condições comerciais
+                                    apresentadas no Termo de Adesão.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">05.</span>
+
+                                <span class="faq-question-text">
+                                    Por que posso receber duas cobranças?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    A distribuidora continua emitindo a fatura
+                                    relacionada à rede elétrica, encargos,
+                                    tributos, custo de disponibilidade,
+                                    iluminação pública e demais itens que não
+                                    fazem parte da compensação.
+                                </p>
+
+                                <p>
+                                    A outra cobrança corresponde aos créditos
+                                    de energia compensados pela ATL Energy,
+                                    aplicando as condições comerciais
+                                    contratadas. A economia deve ser analisada
+                                    considerando o conjunto das cobranças.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">06.</span>
+
+                                <span class="faq-question-text">
+                                    A CEMIG continuará fornecendo minha energia?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    Sim. A distribuidora continua responsável
+                                    pela rede elétrica, leitura do medidor,
+                                    manutenção, qualidade do fornecimento e
+                                    atendimento em casos de falta de energia.
+                                </p>
+
+                                <p>
+                                    A adesão não altera a estrutura física nem
+                                    o funcionamento da instalação elétrica.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">07.</span>
+
+                                <span class="faq-question-text">
+                                    Quem pode participar?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    A solução é direcionada a unidades
+                                    consumidoras do Grupo B, atendidas em baixa
+                                    tensão, com instalação bifásica ou
+                                    trifásica e consumo compatível com os
+                                    critérios comerciais da ATL Energy.
+                                </p>
+
+                                <p>
+                                    Residências, condomínios, empresas e
+                                    pequenos negócios podem solicitar a
+                                    análise. A aprovação depende das
+                                    informações presentes na conta de energia.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">08.</span>
+
+                                <span class="faq-question-text">
+                                    O desconto é aplicado sobre o valor total?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    Não. O percentual é aplicado sobre a
+                                    parcela elegível do consumo de energia,
+                                    conforme a modalidade contratada.
+                                </p>
+
+                                <p>
+                                    Iluminação pública, multas, juros,
+                                    parcelamentos, serviços, custo de
+                                    disponibilidade, tributos e outras
+                                    cobranças podem não fazer parte do
+                                    desconto.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">09.</span>
+
+                                <span class="faq-question-text">
+                                    Quanto posso economizar?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    A economia pode chegar a até 15% sobre a
+                                    parcela elegível do consumo, dependendo do
+                                    perfil da unidade, das informações da
+                                    fatura e das condições comerciais
+                                    disponíveis.
+                                </p>
+
+                                <p>
+                                    A simulação inicial é apenas uma estimativa.
+                                    O valor definitivo é confirmado após a
+                                    análise da conta de energia.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">10.</span>
+
+                                <span class="faq-question-text">
+                                    Quanto tempo leva para começar a compensação?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    Depois da assinatura do Termo de Adesão, o
+                                    cadastro passa pelas etapas operacionais e
+                                    regulatórias necessárias para inclusão da
+                                    unidade consumidora.
+                                </p>
+
+                                <p>
+                                    O prazo pode variar conforme a distribuidora,
+                                    disponibilidade de créditos e processamento
+                                    da solicitação. O especialista da ATL
+                                    Energy acompanha e informa o andamento.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+
+                    <article class="faq-item">
+                        <h3>
+                            <button
+                                class="faq-question"
+                                type="button"
+                                aria-expanded="false"
+                            >
+                                <span class="faq-number">11.</span>
+
+                                <span class="faq-question-text">
+                                    Posso cancelar posteriormente?
+                                </span>
+
+                                <span class="faq-icon" aria-hidden="true"></span>
+                            </button>
+                        </h3>
+
+                        <div class="faq-answer" hidden>
+                            <div class="faq-answer-content">
+                                <p>
+                                    O cancelamento segue as regras, prazos e
+                                    condições previstos no Termo de Adesão.
+                                    Essas informações devem ser verificadas
+                                    antes da assinatura do contrato.
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section
+            class="final-cta-section"
+            aria-labelledby="final-cta-title"
+        >
+            <img
+                class="final-cta-background"
+                src="assets/images/felicidade-janela-laranja.png"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+            >
+
+            <div class="final-cta-overlay" aria-hidden="true"></div>
+
+            <div class="final-cta-container">
+                <div class="final-cta-content">
+
+                    <p class="final-cta-kicker">
+                        Sua economia pode começar aqui
+                    </p>
+
+                    <h2 id="final-cta-title">
+                        Pronto para economizar?
+                    </h2>
+
+                    <p>
+                        Faça sua análise gratuita e descubra se sua residência
+                        ou empresa pode receber créditos de energia com
+                        economia todos os meses.
+                    </p>
+
+                    <a
+                        class="final-cta-button js-scroll-to-registration"
+                        href="#cadastro"
+                    >
+                        Quero calcular minha economia
+
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="m9 5 7 7-7 7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <div
+        class="law-modal"
+        id="law-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="law-modal-title"
+        aria-describedby="law-modal-description"
+        aria-hidden="true"
+    >
+        <div
+            class="law-modal-backdrop"
+            data-law-modal-close
+            aria-hidden="true"
+        ></div>
+
+        <div class="law-modal-panel" role="document">
+
+            <button
+                class="law-modal-close"
+                id="law-modal-close"
+                type="button"
+                aria-label="Fechar informações sobre a Lei 14.300/2022"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M6 6l12 12M18 6 6 18"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+                </svg>
+            </button>
+
+            <div class="law-modal-header">
+                <span class="law-modal-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M7 3h8l4 4v14H7V3Zm8 1.8V8h3.2"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M10 12h6M10 15h6M10 18h4"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </span>
+
+                <div>
+                    <p>Marco legal da geração distribuída</p>
+
+                    <h2 id="law-modal-title">
+                        Lei nº 14.300/2022
+                    </h2>
+                </div>
+            </div>
+
+            <div
+                class="law-modal-content"
+                id="law-modal-description"
+            >
+                <p>
+                    A Lei nº 14.300, de 6 de janeiro de 2022, instituiu
+                    o marco legal da microgeração e minigeração distribuída
+                    no Brasil e o Sistema de Compensação de Energia Elétrica.
+                </p>
+
+                <div class="law-modal-highlight">
+                    <strong>O que isso significa?</strong>
+
+                    <p>
+                        A legislação estabelece regras para que a energia
+                        produzida por sistemas de geração distribuída seja
+                        injetada na rede elétrica e utilizada na compensação
+                        do consumo de unidades participantes.
+                    </p>
+                </div>
+
+                <ul>
+                    <li>
+                        Regulamenta a micro e a minigeração distribuída.
+                    </li>
+
+                    <li>
+                        Define o Sistema de Compensação de Energia Elétrica.
+                    </li>
+
+                    <li>
+                        Permite modalidades como geração compartilhada e
+                        autoconsumo remoto.
+                    </li>
+
+                    <li>
+                        Mantém a distribuidora responsável pela rede,
+                        medição e fornecimento.
+                    </li>
+                </ul>
+
+                <p class="law-modal-notice">
+                    A lei não determina um desconto comercial fixo de 15%.
+                    O percentual oferecido depende da proposta da ATL Energy,
+                    da elegibilidade da unidade e das condições contratuais.
+                </p>
+
+                <a
+                    class="law-official-link"
+                    href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14300.htm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Consultar texto oficial da lei
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M14 5h5v5M19 5l-8 8"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M18 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        />
+                    </svg>
+                </a>
+            </div>
+
+            <button
+                class="law-modal-footer-close"
+                type="button"
+                data-law-modal-close
+            >
+                Fechar
+            </button>
+
+        </div>
+    </div>
+
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
