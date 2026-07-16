@@ -5,7 +5,42 @@
    CONFIGURAÇÃO
 ========================================================= */
 
-const WHATSAPP_NUMBER = "5535991284648";
+const DEFAULT_WHATSAPP_NUMBER = "5535991284648";
+
+function getConsultantSlug() {
+    const pathSegments = window.location.pathname
+        .split("/")
+        .map((segment) => segment.trim().toLowerCase())
+        .filter(Boolean);
+
+    if (pathSegments.length !== 1) {
+        return "";
+    }
+
+    return decodeURIComponent(pathSegments[0]);
+}
+
+function getActiveWhatsAppNumber() {
+    const consultantSlug = getConsultantSlug();
+    const consultants =
+        window.ATL_CONSULTORES &&
+        typeof window.ATL_CONSULTORES === "object"
+            ? window.ATL_CONSULTORES
+            : {};
+
+    const consultantNumber = consultants[consultantSlug];
+
+    if (
+        typeof consultantNumber === "string" &&
+        /^\d{12,13}$/.test(consultantNumber)
+    ) {
+        return consultantNumber;
+    }
+
+    return DEFAULT_WHATSAPP_NUMBER;
+}
+
+const WHATSAPP_NUMBER = getActiveWhatsAppNumber();
 
 /*
  * A simulação utiliza como referência o exemplo informado:
