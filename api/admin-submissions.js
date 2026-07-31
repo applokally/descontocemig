@@ -7,8 +7,7 @@ async function readManifest(pathname) {
   return new Response(result.stream).json();
 }
 
-export default async function handler(request) {
-  if (request.method !== 'GET') return json({ error: 'Método não permitido.' }, 405);
+export async function GET(request) {
   if (!requireAdmin(request)) return json({ error: 'Sessão expirada.' }, 401);
   try {
     const { blobs } = await list({ prefix: 'manifests/', limit: 1000 });

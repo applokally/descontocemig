@@ -1,8 +1,7 @@
 import { get } from '@vercel/blob';
 import { requireAdmin } from './_lib/security.js';
 
-export default async function handler(request) {
-  if (request.method !== 'GET') return new Response('Método não permitido.', { status: 405 });
+export async function GET(request) {
   if (!requireAdmin(request)) return new Response('Sessão expirada.', { status: 401 });
   const url = new URL(request.url);
   const pathname = url.searchParams.get('pathname') || '';

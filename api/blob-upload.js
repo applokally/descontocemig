@@ -7,8 +7,7 @@ const kinds = {
   'cemig-bill': ['application/pdf','image/jpeg','image/png','image/webp']
 };
 
-export default async function handler(request) {
-  if (request.method !== 'POST') return json({ error: 'Método não permitido.' }, 405);
+export async function POST(request) {
   try {
     const body = await request.json();
     const result = await handleUpload({

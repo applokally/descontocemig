@@ -11,8 +11,7 @@ function safeOriginalName(value) {
   return String(value || 'arquivo').replace(/[^a-zA-Z0-9 ._()À-ÿ-]/g, '').slice(0, 160);
 }
 
-export default async function handler(request) {
-  if (request.method !== 'POST') return json({ error: 'Método não permitido.' }, 405);
+export async function POST(request) {
   if (!sameOrigin(request)) return json({ error: 'Origem não autorizada.' }, 403);
   try {
     const body = await request.json();
