@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Cadastro seguro da conta CEMIG para ativação do desconto ATL Energy.">
+  <meta name="robots" content="noindex,follow">
+  <title>Cadastrar conta CEMIG | ATL Energy</title>
+  <link rel="icon" href="/assets/images/logo-atl.png">
+  <link rel="stylesheet" href="/cadastrar_conta/cadastro.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Voltar para a página inicial"><img src="/assets/images/logo-atl.png" alt="ATL Energy"></a>
+    <div class="header-trust"><span aria-hidden="true">✓</span> Ambiente seguro</div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero__copy">
+        <span class="eyebrow">Última etapa para começar a economizar</span>
+        <h1>Cadastre sua conta CEMIG com segurança</h1>
+        <p>São apenas 3 etapas rápidas. Pedimos somente as informações necessárias para confirmar a titularidade e cadastrar a unidade consumidora.</p>
+        <div class="trust-row">
+          <div><strong>Seus arquivos são privados</strong><span>Acesso restrito à equipe responsável</span></div>
+          <div><strong>Dados protegidos</strong><span>Envio seguro e armazenamento controlado</span></div>
+          <div><strong>Leva poucos minutos</strong><span>Você acompanha cada etapa</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="form-shell" aria-labelledby="form-title">
+      <aside class="why-card">
+        <span class="why-card__icon" aria-hidden="true">🔒</span>
+        <h2>Por que precisamos desses dados?</h2>
+        <p>A CEMIG exige que o cadastro seja feito em nome do titular da conta. O documento confirma a identidade e a conta de energia identifica a unidade consumidora.</p>
+        <ul>
+          <li>Não solicitamos pagamento</li>
+          <li>Não pedimos senha da CEMIG</li>
+          <li>Não compartilhamos seus documentos fora da operação necessária</li>
+        </ul>
+        <p class="lgpd-note">Tratamos os dados conforme a LGPD e apenas para analisar e concluir sua adesão.</p>
+      </aside>
+      <div class="form-card">
+        <div class="form-heading">
+          <div><span class="eyebrow">Cadastro da unidade consumidora</span><h2 id="form-title">Vamos começar?</h2></div>
+          <span class="required-note">* Todos os campos são obrigatórios</span>
+        </div>
+        <nav class="stepper" aria-label="Etapas do cadastro">
+          <button type="button" class="stepper__item is-active" data-step-indicator="1" aria-current="step"><span>1</span><strong>Dados do titular</strong></button>
+          <div class="stepper__line"></div>
+          <button type="button" class="stepper__item" data-step-indicator="2" disabled><span>2</span><strong>Documento</strong></button>
+          <div class="stepper__line"></div>
+          <button type="button" class="stepper__item" data-step-indicator="3" disabled><span>3</span><strong>Conta CEMIG</strong></button>
+        </nav>
+        <form id="registration-form" novalidate>
+          <section class="form-step is-active" data-step="1">
+            <div class="step-intro"><span class="step-number">Etapa 1 de 3</span><h3>Dados pessoais do titular</h3><p>Preencha exatamente como aparece no documento do titular da conta de energia.</p></div>
+            <div class="field-grid">
+              <label class="field"><span>Nome *</span><input name="givenName" autocomplete="given-name" maxlength="60" required placeholder="Ex.: Maria"><small>Sem abreviações</small></label>
+              <label class="field"><span>Sobrenome *</span><input name="surname" autocomplete="family-name" maxlength="100" required placeholder="Ex.: da Silva"></label>
+              <label class="field"><span>Nacionalidade *</span><select name="nationality" required><option value="Brasil">Brasil</option><option value="Outra">Outra</option></select></label>
+              <label class="field"><span>Data de nascimento *</span><input name="birthDate" type="date" autocomplete="bday" required></label>
+              <label class="field field--wide"><span>E-mail para recebimento do contrato *</span><input name="email" type="email" autocomplete="email" maxlength="120" required placeholder="voce@exemplo.com"></label>
+              <label class="field"><span>Celular com WhatsApp *</span><input name="phone" inputmode="tel" autocomplete="tel" maxlength="16" required placeholder="(31) 99999-9999"></label>
+              <label class="field"><span>Tipo de pessoa *</span><select name="personType" required><option value="PF">Pessoa física (PF)</option></select></label>
+              <label class="field"><span>CPF *</span><input name="cpf" inputmode="numeric" autocomplete="off" maxlength="14" required placeholder="000.000.000-00"><small>CPF do titular da conta CEMIG</small></label>
+              <label class="field"><span>RG *</span><input name="rg" autocomplete="off" maxlength="30" required placeholder="Número do RG"></label>
+              <label class="field"><span>Estado civil *</span><select name="maritalStatus" required><option value="">Selecione</option><option>Solteiro(a)</option><option>Casado(a)</option><option>União estável</option><option>Divorciado(a)</option><option>Viúvo(a)</option><option>Não informado</option></select></label>
+              <label class="field"><span>Profissão *</span><input name="profession" maxlength="80" required placeholder="Ex.: Professora"></label>
+              <label class="field"><span>Documento que será enviado *</span><select name="documentType" required><option value="">Selecione</option><option value="RG">RG com CPF</option><option value="CNH">CNH</option></select></label>
+            </div>
+          </section>
+          <section class="form-step" data-step="2" hidden>
+            <div class="step-intro"><span class="step-number">Etapa 2 de 3</span><h3>Comprovação de titularidade</h3><p>Envie a frente e o verso de um documento oficial que mostre o CPF do titular. Cada lado tem seu próprio campo.</p></div>
+            <div class="tip-card"><strong>Como tirar uma boa foto</strong><div class="tips"><span>☀️ Use um local bem iluminado</span><span>▣ Enquadre os 4 cantos</span><span>🔍 Confira se os dados estão legíveis</span><span>✨ Evite reflexos e dedos sobre o documento</span></div></div>
+            <div class="upload-grid">
+              <label class="upload-card" data-upload="documentFront"><input type="file" name="documentFront" accept="image/jpeg,image/png,image/webp" required><span class="upload-card__icon">1</span><strong>Frente do documento *</strong><span class="upload-card__hint">Toque para fotografar ou escolher uma imagem</span><span class="upload-card__file">Nenhum arquivo selecionado</span></label>
+              <label class="upload-card" data-upload="documentBack"><input type="file" name="documentBack" accept="image/jpeg,image/png,image/webp" required><span class="upload-card__icon">2</span><strong>Verso do documento *</strong><span class="upload-card__hint">Toque para fotografar ou escolher uma imagem</span><span class="upload-card__file">Nenhum arquivo selecionado</span></label>
+            </div>
+            <p class="file-rule">Formatos aceitos: JPG, PNG ou WEBP. Máximo de 10 MB por arquivo.</p>
+          </section>
+          <section class="form-step" data-step="3" hidden>
+            <div class="step-intro"><span class="step-number">Etapa 3 de 3</span><h3>Última conta de energia CEMIG</h3><p>Ela nos permite localizar a unidade consumidora e validar os dados do titular.</p></div>
+            <div class="bill-layout">
+              <div><label class="upload-card upload-card--bill" data-upload="cemigBill"><input type="file" name="cemigBill" accept="application/pdf,image/jpeg,image/png,image/webp" required><span class="upload-card__icon">⚡</span><strong>Enviar última conta CEMIG *</strong><span class="upload-card__hint">PDF é o formato ideal. Também aceitamos foto legível.</span><span class="upload-card__file">Nenhum arquivo selecionado</span></label><p class="file-rule">PDF, JPG, PNG ou WEBP. Máximo de 10 MB.</p></div>
+              <div class="app-card"><span class="app-card__badge">Não encontrou a conta?</span><h4>Baixe a 2ª via pelo app oficial CEMIG Atende</h4><p>No aplicativo você consegue baixar e compartilhar a conta em PDF.</p><div class="store-links"><a href="https://play.google.com/store/apps/details?id=com.cemig.agenciadebolso" target="_blank" rel="noopener noreferrer">▶ Baixar no Google Play</a><a href="https://apps.apple.com/br/app/cemig-atende/id878167773" target="_blank" rel="noopener noreferrer"> Baixar na App Store</a></div><a class="cemig-link" href="https://www.cemig.com.br/como-solicitar-os-principais-servicos/segunda-via-de-conta/" target="_blank" rel="noopener noreferrer">Ver instruções oficiais da CEMIG →</a></div>
+            </div>
+            <div class="review-card"><strong>Antes de enviar</strong><p>Confira se o documento pertence ao mesmo titular da conta CEMIG e se todos os arquivos estão legíveis.</p><label class="consent"><input type="checkbox" name="consent" required><span>Autorizo o tratamento dos meus dados pessoais e documentos para análise, cadastro e formalização da adesão, conforme a <a href="/politica-de-privacidade.html" target="_blank">Política de Privacidade</a>. *</span></label></div>
+          </section>
+          <div class="form-actions"><button type="button" class="button button--ghost" id="back-button" hidden>← Voltar</button><button type="button" class="button button--primary" id="next-button">Continuar com segurança →</button><button type="submit" class="button button--primary" id="submit-button" hidden>Enviar cadastro seguro</button></div>
+          <div class="form-error" id="form-error" role="alert" hidden></div>
+        </form>
+        <div class="sending" id="sending" hidden aria-live="polite"><div class="spinner"></div><h3>Enviando seus dados com segurança</h3><p id="sending-status">Preparando o envio…</p><div class="progress"><span id="progress-bar"></span></div><small>Não feche esta página até a confirmação.</small></div>
+        <div class="success" id="success" hidden><span class="success__icon">✓</span><span class="eyebrow">Cadastro recebido</span><h2>Tudo certo!</h2><p>Seus dados e documentos foram enviados com segurança. Nossa equipe fará a conferência e entrará em contato se precisar de alguma informação.</p><div class="protocol">Protocolo: <strong id="protocol"></strong></div><a class="button button--primary" href="/">Voltar para a página inicial</a></div>
+      </div>
+    </section>
+  </main>
+  <footer><img src="/assets/images/logo-atl.png" alt="ATL Energy"><p>ATL Energy · Cadastro protegido</p><a href="/politica-de-privacidade.html">Política de Privacidade</a></footer>
+  <script type="module" src="/cadastrar_conta/cadastro.js"></script>
+</body>
+</html>
