@@ -51,7 +51,7 @@ const WHATSAPP_NUMBER = getActiveWhatsAppNumber();
  */
 const ELIGIBLE_ENERGY_RATE = 0.77;
 const DISCOUNT_RATE = 0.15;
-const MINIMUM_BILL_VALUE = 160;
+const MINIMUM_BILL_VALUE = 200;
 
 
 /* =========================================================
@@ -269,21 +269,16 @@ calculatorContinueButton.addEventListener("click", () => {
 
     if (!validateBillValue(billValue)) {
         billValueInput.focus();
-
         return;
     }
 
     simulationData = calculateSavings(billValue);
-
     updateSimulationDisplay(simulationData);
     updateHiddenSimulationFields(simulationData);
-
-    calculatorStep.hidden = true;
-    formStep.hidden = false;
-
-    window.setTimeout(() => {
-        nameInput.focus();
-    }, 100);
+    openFullRegistration({
+        profile: selectedProfile,
+        simulation: simulationData
+    });
 });
 
 
@@ -662,7 +657,7 @@ leadForm.addEventListener("submit", (event) => {
         return;
     }
 
-    openRegistrationWhatsApp({
+    openFullRegistration({
         profile,
         fullName,
         email,
@@ -807,44 +802,22 @@ function clearAllErrors() {
    WHATSAPP
 ========================================================= */
 
-function openRegistrationWhatsApp({
-    profile,
-    fullName,
-    email,
-    documentValue,
-    simulation
-}) {
-    const documentType =
-        profile === "Residencial" ? "CPF" : "CNPJ";
+function openFullRegistration({ profile, simulation }) {
+    const params = new URLSearchParams({
+        perfil: profile,
+        valorConta: simulation.billValue.toFixed(2),
+        economiaMensal: simulation.monthlySavings.toFixed(2),
+        economiaAnual: simulation.annualSavings.toFixed(2),
+        valorFinal: simulation.estimatedFinalValue.toFixed(2)
+    });
+    const consultantSlug = getConsultantSlug();
 
-    const message = [
-        "Olá! Quero iniciar meu cadastro gratuito para análise de economia na conta de energia.",
-        "",
-        `Perfil: ${profile}`,
-        `Nome completo: ${fullName}`,
-        `E-mail: ${email}`,
-        `${documentType}: ${documentValue}`,
-        "",
-        "*Simulação realizada:*",
-        `Valor informado da conta: ${formatCurrency(
-            simulation.billValue
-        )}`,
-        `Economia mensal estimada: ${formatCurrency(
-            simulation.monthlySavings
-        )}`,
-        `Economia anual estimada: ${formatCurrency(
-            simulation.annualSavings
-        )}`,
-        `Valor total estimado após a economia: ${formatCurrency(
-            simulation.estimatedFinalValue
-        )}`,
-        "",
-        "Aguardo o atendimento de um especialista da ATL Energy para continuar meu cadastro."
-    ].join("\n");
+    if (consultantSlug) {
+        params.set("consultor", consultantSlug);
+    }
 
-    openWhatsApp(message);
+    window.location.assign("/cadastrar_conta?" + params.toString());
 }
-
 
 whatsappContactButtons.forEach((button) => {
     button.addEventListener("click", (event) => {

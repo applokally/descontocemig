@@ -68,8 +68,15 @@ export function createUploadSession() {
   };
 }
 
-export function createAdminSession(email) {
-  return signToken({ type: 'admin', email, exp: Date.now() + 8 * 60 * 60 * 1000 });
+export function createAdminSession(user) {
+  return signToken({
+    type: 'admin',
+    role: user.role,
+    email: user.email,
+    slug: user.slug || '',
+    name: user.name || '',
+    exp: Date.now() + 8 * 60 * 60 * 1000
+  });
 }
 
 export function sessionCookie(token) {
@@ -124,7 +131,12 @@ export function validateHolder(input) {
     profession: clean(input?.profession, 80),
     documentType: clean(input?.documentType, 10),
     consent: input?.consent === true,
-    consultant: clean(input?.consultant, 80)
+    consultant: clean(input?.consultant, 80),
+    profile: clean(input?.profile, 30),
+    billValue: clean(input?.billValue, 20),
+    monthlySavings: clean(input?.monthlySavings, 20),
+    annualSavings: clean(input?.annualSavings, 20),
+    estimatedFinalValue: clean(input?.estimatedFinalValue, 20)
   };
 
   const requiredText = ['givenName','surname','nationality','birthDate','email','phone','personType','cpf','rg','maritalStatus','profession','documentType'];

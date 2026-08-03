@@ -4,7 +4,7 @@ import { json, protocolFromId, sameOrigin, validateHolder, verifyToken } from '.
 const expected = {
   documentFront: { kind: 'document-front', types: ['image/jpeg','image/png','image/webp'] },
   documentBack: { kind: 'document-back', types: ['image/jpeg','image/png','image/webp'] },
-  cemigBill: { kind: 'cemig-bill', types: ['application/pdf','image/jpeg','image/png','image/webp'] }
+  cemigBill: { kind: 'energy-bill', types: ['application/pdf','image/jpeg','image/png','image/webp'] }
 };
 
 function safeOriginalName(value) {
@@ -37,14 +37,16 @@ export async function POST(request) {
     }
 
     const createdAt = new Date().toISOString();
+    const affiliateSlug = String(holder.consultant || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
     const manifest = {
       id: session.id,
       protocol: protocolFromId(session.id),
       status: 'new',
       createdAt,
       holder,
+      affiliateSlug,
       files,
-      source: 'descontocemig.atlservicos.com.br/cadastrar_conta'
+      source: 'energy.atlservicos.com.br/cadastrar_conta'
     };
 
     await put('manifests/' + session.id + '.json', JSON.stringify(manifest), {

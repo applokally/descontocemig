@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Cadastros CEMIG | ATL Energy</title>
+  <title>Painel de cadastros | ATL Energy</title>
   <link rel="icon" href="/assets/images/logo-atl.png">
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
@@ -15,8 +15,8 @@
       <div class="login-card">
         <span class="lock">🔒</span>
         <p class="eyebrow">Acesso restrito</p>
-        <h1>Cadastros de contas CEMIG</h1>
-        <p class="intro">Entre com suas credenciais para consultar os dados e baixar os documentos enviados.</p>
+        <h1>Painel de cadastros de energia</h1>
+        <p class="intro">Entre com suas credenciais para consultar os dados e documentos vinculados ao seu acesso.</p>
         <form id="login-form">
           <label><span>E-mail</span><input name="email" type="email" autocomplete="username" required></label>
           <label><span>Senha</span><input name="password" type="password" autocomplete="current-password" required></label>
@@ -29,15 +29,35 @@
     <section class="dashboard" id="dashboard" hidden>
       <header class="topbar">
         <a href="/"><img src="/assets/images/logo-atl.png" alt="ATL Energy"></a>
-        <div><span id="admin-email"></span><button type="button" id="logout-button">Sair</button></div>
+        <div><span id="admin-identity"></span><span class="role-badge" id="admin-role"></span><button type="button" id="logout-button">Sair</button></div>
       </header>
       <div class="page">
         <div class="page-heading">
-          <div><p class="eyebrow">Área administrativa</p><h1>Cadastros recebidos</h1><p>Dados e documentos armazenados de forma privada.</p></div>
+          <div><p class="eyebrow" id="area-label">Área administrativa</p><h1>Cadastros recebidos</h1><p id="scope-message">Dados e documentos armazenados de forma privada.</p></div>
           <button type="button" class="refresh" id="refresh-button">↻ Atualizar</button>
         </div>
+
+        <section class="downline-panel" id="downline-panel" hidden>
+          <div class="section-heading"><div><p class="eyebrow">Gestão da rede</p><h2>Cadastrar downline</h2><p>Crie o acesso e o link exclusivo que identifica os cadastros dessa pessoa.</p></div></div>
+          <form id="downline-form" class="downline-form">
+            <label><span>Nome</span><input name="givenName" autocomplete="given-name" required></label>
+            <label><span>Sobrenome</span><input name="surname" autocomplete="family-name" required></label>
+            <label><span>E-mail</span><input name="email" type="email" autocomplete="off" required></label>
+            <label><span>Senha inicial</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+            <button type="submit">Criar downline</button>
+          </form>
+          <p class="notice success" id="downline-success" hidden></p>
+          <p class="error" id="downline-error" hidden></p>
+          <div class="downline-list" id="downline-list"></div>
+        </section>
+
+        <section class="affiliate-card" id="affiliate-card" hidden>
+          <div><span>Seu link exclusivo</span><strong id="affiliate-link"></strong></div>
+          <button type="button" id="copy-affiliate-link">Copiar link</button>
+        </section>
+
         <div class="metrics">
-          <article><span>Total</span><strong id="total-count">0</strong><small>cadastros recebidos</small></article>
+          <article><span>Total</span><strong id="total-count">0</strong><small>cadastros disponíveis</small></article>
           <article><span>Hoje</span><strong id="today-count">0</strong><small>novos cadastros</small></article>
           <article><span>Documentos</span><strong id="document-count">0</strong><small>arquivos protegidos</small></article>
         </div>
@@ -47,7 +67,7 @@
         </div>
         <div class="loading" id="loading"><span></span><p>Carregando cadastros…</p></div>
         <div class="notice" id="dashboard-error" hidden></div>
-        <div class="empty" id="empty-state" hidden><span>📄</span><h2>Nenhum cadastro encontrado</h2><p>Os novos envios aparecerão aqui automaticamente.</p></div>
+        <div class="empty" id="empty-state" hidden><span>📄</span><h2>Nenhum cadastro encontrado</h2><p>Os novos envios vinculados a este acesso aparecerão aqui automaticamente.</p></div>
         <div class="submission-list" id="submission-list"></div>
       </div>
     </section>

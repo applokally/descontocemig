@@ -12,6 +12,7 @@ const success = document.querySelector('#success');
 const progressBar = document.querySelector('#progress-bar');
 const sendingStatus = document.querySelector('#sending-status');
 let currentStep = 1;
+const flowParams = new URLSearchParams(location.search);
 
 const digits = value => value.replace(/\D/g, '');
 const cpfInput = form.elements.cpf;
@@ -152,7 +153,12 @@ function holderPayload() {
     profession: String(data.get('profession') || '').trim(),
     documentType: String(data.get('documentType') || ''),
     consent: data.get('consent') === 'on',
-    consultant: new URLSearchParams(location.search).get('consultor') || ''
+    consultant: flowParams.get('consultor') || '',
+    profile: flowParams.get('perfil') || '',
+    billValue: flowParams.get('valorConta') || '',
+    monthlySavings: flowParams.get('economiaMensal') || '',
+    annualSavings: flowParams.get('economiaAnual') || '',
+    estimatedFinalValue: flowParams.get('valorFinal') || ''
   };
 }
 
@@ -209,7 +215,7 @@ form.addEventListener('submit', async event => {
     sendingStatus.textContent = 'Enviando o verso do documento…';
     const backBlob = await uploadFile(back, 'document-back', session);
     progressBar.style.width = '66%';
-    sendingStatus.textContent = 'Enviando a conta CEMIG…';
+    sendingStatus.textContent = 'Enviando a conta de energia…';
     const billBlob = await uploadFile(bill, 'cemig-bill', session);
     progressBar.style.width = '88%';
     sendingStatus.textContent = 'Finalizando seu cadastro…';
