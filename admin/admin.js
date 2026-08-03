@@ -69,12 +69,13 @@ function render(items) {
     const h = item.holder || {};
     const files = item.files || {};
     const fullName = [h.givenName, h.surname].filter(Boolean).join(' ');
+    const simulationData = h.simulation || h;
     const simulation = [
       detail('Perfil simulado', h.profile),
-      detail('Valor da conta', displayMoney(h.billValue)),
-      detail('Economia mensal', displayMoney(h.monthlySavings)),
-      detail('Economia anual', displayMoney(h.annualSavings)),
-      detail('Conta estimada', displayMoney(h.estimatedFinalValue))
+      detail('Valor da conta', displayMoney(simulationData.billValue)),
+      detail('Economia mensal', displayMoney(simulationData.monthlySavings)),
+      detail('Economia anual', displayMoney(simulationData.annualSavings)),
+      detail('Conta estimada', displayMoney(simulationData.estimatedFinalValue))
     ].join('');
     const documents = [
       fileLink(files.documentFront, 'Frente do documento'),

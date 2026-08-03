@@ -117,6 +117,15 @@ export function validCpf(value) {
 }
 
 export function validateHolder(input) {
+  const rawSimulation = input?.simulation && typeof input.simulation === 'object'
+    ? input.simulation
+    : {};
+  const simulation = {
+    billValue: clean(rawSimulation.billValue ?? input?.billValue, 20),
+    monthlySavings: clean(rawSimulation.monthlySavings ?? input?.monthlySavings, 20),
+    annualSavings: clean(rawSimulation.annualSavings ?? input?.annualSavings, 20),
+    estimatedFinalValue: clean(rawSimulation.estimatedFinalValue ?? input?.estimatedFinalValue, 20)
+  };
   const holder = {
     givenName: clean(input?.givenName, 60),
     surname: clean(input?.surname, 100),
@@ -133,10 +142,8 @@ export function validateHolder(input) {
     consent: input?.consent === true,
     consultant: clean(input?.consultant, 80),
     profile: clean(input?.profile, 30),
-    billValue: clean(input?.billValue, 20),
-    monthlySavings: clean(input?.monthlySavings, 20),
-    annualSavings: clean(input?.annualSavings, 20),
-    estimatedFinalValue: clean(input?.estimatedFinalValue, 20)
+    ...simulation,
+    simulation
   };
 
   const requiredText = ['givenName','surname','nationality','birthDate','email','phone','personType','cpf','rg','maritalStatus','profession','documentType'];

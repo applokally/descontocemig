@@ -139,6 +139,12 @@ document.querySelectorAll('.upload-card input[type="file"]').forEach(input => {
 
 function holderPayload() {
   const data = new FormData(form);
+  const simulation = {
+    billValue: flowParams.get('valorConta') || '',
+    monthlySavings: flowParams.get('economiaMensal') || '',
+    annualSavings: flowParams.get('economiaAnual') || '',
+    estimatedFinalValue: flowParams.get('valorFinal') || ''
+  };
   return {
     givenName: String(data.get('givenName') || '').trim(),
     surname: String(data.get('surname') || '').trim(),
@@ -155,10 +161,8 @@ function holderPayload() {
     consent: data.get('consent') === 'on',
     consultant: flowParams.get('consultor') || '',
     profile: flowParams.get('perfil') || '',
-    billValue: flowParams.get('valorConta') || '',
-    monthlySavings: flowParams.get('economiaMensal') || '',
-    annualSavings: flowParams.get('economiaAnual') || '',
-    estimatedFinalValue: flowParams.get('valorFinal') || ''
+    ...simulation,
+    simulation
   };
 }
 
