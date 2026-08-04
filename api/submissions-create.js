@@ -4,7 +4,7 @@ import { json, protocolFromId, sameOrigin, validateHolder, verifyToken } from '.
 const expected = {
   documentFront: { kind: 'document-front', types: ['image/jpeg','image/png','image/webp'] },
   documentBack: { kind: 'document-back', types: ['image/jpeg','image/png','image/webp'] },
-  cemigBill: { kind: 'energy-bill', types: ['application/pdf','image/jpeg','image/png','image/webp'] }
+  cemigBill: { kind: 'energy-bill', aliases: ['cemig-bill'], types: ['application/pdf','image/jpeg','image/png','image/webp'] }
 };
 
 function safeOriginalName(value) {
@@ -23,8 +23,9 @@ export async function POST(request) {
     for (const [key, rule] of Object.entries(expected)) {
       const sent = body.files?.[key];
       const pathname = String(sent?.pathname || '');
-      const prefix = 'documents/' + session.id + '/' + rule.kind + '-';
-      if (!pathname.startsWith(prefix) || pathname.includes('..')) throw new Error('Arquivo obrigatório ausente ou inválido.');
+      const validKinds = [rule.kind, ...(rule.aliases || [])];
+      const validPath = validKinds.some((kind) => pathname.startsWith('documents/' + session.id + '/' + kind + '-'));
+      if (!validPath || pathname.includes('..')) throw new Error('Arquivo obrigatório ausente ou inválido.');
       const metadata = await head(pathname);
       if (!metadata || metadata.size > 10 * 1024 * 1024 || !rule.types.includes(metadata.contentType)) throw new Error('Um dos arquivos enviados não é válido.');
       files[key] = {

@@ -4,7 +4,8 @@ import { json, verifyToken } from './_lib/security.js';
 const kinds = {
   'document-front': ['image/jpeg','image/png','image/webp'],
   'document-back': ['image/jpeg','image/png','image/webp'],
-  'energy-bill': ['application/pdf','image/jpeg','image/png','image/webp']
+  'energy-bill': ['application/pdf','image/jpeg','image/png','image/webp'],
+  'cemig-bill': ['application/pdf','image/jpeg','image/png','image/webp']
 };
 
 export async function POST(request) {
