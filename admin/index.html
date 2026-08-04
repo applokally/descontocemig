@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <title>Painel de cadastros | ATL Energy</title>
+  <title>Painel administrativo | ATL Energy</title>
   <link rel="icon" href="/assets/images/logo-atl.png">
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
@@ -27,51 +27,115 @@
     </section>
 
     <section class="dashboard" id="dashboard" hidden>
-      <header class="topbar">
-        <a href="/"><img src="/assets/images/logo-atl.png" alt="ATL Energy"></a>
-        <div><span id="admin-identity"></span><span class="role-badge" id="admin-role"></span><button type="button" id="logout-button">Sair</button></div>
-      </header>
-      <div class="page">
-        <div class="page-heading">
-          <div><p class="eyebrow" id="area-label">Área administrativa</p><h1>Cadastros recebidos</h1><p id="scope-message">Dados e documentos armazenados de forma privada.</p></div>
-          <button type="button" class="refresh" id="refresh-button">↻ Atualizar</button>
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <a href="/"><img src="/assets/images/logo-atl.png" alt="ATL Energy"></a>
+          <button type="button" class="sidebar__close" id="sidebar-close" aria-label="Fechar menu">×</button>
         </div>
-
-        <section class="downline-panel" id="downline-panel" hidden>
-          <div class="section-heading"><div><p class="eyebrow">Gestão da rede</p><h2>Cadastrar downline</h2><p>Crie o acesso e o link exclusivo que identifica os cadastros dessa pessoa.</p></div></div>
-          <form id="downline-form" class="downline-form">
-            <label><span>Nome</span><input name="givenName" autocomplete="given-name" required></label>
-            <label><span>Sobrenome</span><input name="surname" autocomplete="family-name" required></label>
-            <label><span>E-mail</span><input name="email" type="email" autocomplete="off" required></label>
-            <label><span>Senha inicial</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
-            <button type="submit">Criar downline</button>
-          </form>
-          <p class="notice success" id="downline-success" hidden></p>
-          <p class="error" id="downline-error" hidden></p>
-          <div class="downline-list" id="downline-list"></div>
-        </section>
-
-        <section class="affiliate-card" id="affiliate-card" hidden>
-          <div><span>Seu link exclusivo</span><strong id="affiliate-link"></strong></div>
-          <button type="button" id="copy-affiliate-link">Copiar link</button>
-        </section>
-
-        <div class="metrics">
-          <article><span>Total</span><strong id="total-count">0</strong><small>cadastros disponíveis</small></article>
-          <article><span>Hoje</span><strong id="today-count">0</strong><small>novos cadastros</small></article>
-          <article><span>Documentos</span><strong id="document-count">0</strong><small>arquivos protegidos</small></article>
+        <nav class="sidebar__nav" aria-label="Menu administrativo">
+          <button type="button" class="nav-item is-active" data-view-target="accounts">
+            <span class="nav-icon">▤</span><span><strong>Contas</strong><small>Cadastros recebidos</small></span>
+          </button>
+          <button type="button" class="nav-item" id="downlines-nav" data-view-target="downlines" hidden>
+            <span class="nav-icon">♧</span><span><strong>Downlines</strong><small>Acessos da rede</small></span>
+          </button>
+        </nav>
+        <div class="sidebar__profile">
+          <span class="profile-avatar" id="profile-avatar">A</span>
+          <div><strong id="admin-identity"></strong><small id="admin-role"></small></div>
         </div>
-        <div class="toolbar">
-          <label><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar por nome, CPF, e-mail ou protocolo"></label>
-          <span id="result-count"></span>
+        <button type="button" class="logout-button" id="logout-button">Sair do painel</button>
+      </aside>
+      <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+      <div class="dashboard-main">
+        <header class="mobile-topbar">
+          <button type="button" id="sidebar-open" aria-label="Abrir menu">☰</button>
+          <img src="/assets/images/logo-atl.png" alt="ATL Energy">
+          <span id="mobile-role"></span>
+        </header>
+
+        <div class="workspace">
+          <section class="view-panel" id="accounts-view">
+            <div class="page-heading">
+              <div><p class="eyebrow" id="area-label">Área administrativa</p><h1>Contas recebidas</h1><p id="scope-message">Dados e documentos armazenados de forma privada.</p></div>
+              <button type="button" class="refresh" id="refresh-button">↻ Atualizar</button>
+            </div>
+
+            <section class="affiliate-card" id="affiliate-card" hidden>
+              <div><span>Seu link exclusivo</span><strong id="affiliate-link"></strong></div>
+              <button type="button" id="copy-affiliate-link">Copiar link</button>
+            </section>
+
+            <div class="metrics">
+              <article><span>Total</span><strong id="total-count">0</strong><small>cadastros disponíveis</small></article>
+              <article><span>Hoje</span><strong id="today-count">0</strong><small>novos cadastros</small></article>
+              <article><span>Documentos</span><strong id="document-count">0</strong><small>arquivos protegidos</small></article>
+            </div>
+            <div class="toolbar">
+              <label><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar por nome, CPF, e-mail ou protocolo"></label>
+              <span id="result-count"></span>
+            </div>
+            <div class="loading" id="loading"><span></span><p>Carregando cadastros…</p></div>
+            <div class="notice" id="dashboard-error" hidden></div>
+            <div class="empty" id="empty-state" hidden><span>📄</span><h2>Nenhum cadastro encontrado</h2><p>Os novos envios vinculados a este acesso aparecerão aqui automaticamente.</p></div>
+            <div class="submission-list" id="submission-list"></div>
+          </section>
+
+          <section class="view-panel" id="downlines-view" hidden>
+            <div class="page-heading">
+              <div><p class="eyebrow">Gestão da rede</p><h1>Downlines</h1><p>Cadastre acessos, abra o link, edite os dados, defina uma nova senha ou exclua um acesso.</p></div>
+              <button type="button" class="refresh" id="refresh-downlines">↻ Atualizar</button>
+            </div>
+
+            <section class="management-card">
+              <div class="section-heading"><div><h2>Novo downline</h2><p>O link exclusivo será criado automaticamente com o nome e sobrenome.</p></div></div>
+              <form id="downline-form" class="downline-form">
+                <label><span>Nome</span><input name="givenName" autocomplete="given-name" required></label>
+                <label><span>Sobrenome</span><input name="surname" autocomplete="family-name" required></label>
+                <label><span>E-mail</span><input name="email" type="email" autocomplete="off" required></label>
+                <label><span>Senha inicial</span><input name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+                <button type="submit">Criar downline</button>
+              </form>
+              <p class="notice success" id="downline-success" hidden></p>
+              <p class="error" id="downline-error" hidden></p>
+            </section>
+
+            <section class="management-card downline-directory">
+              <div class="section-heading directory-heading">
+                <div><h2>Downlines cadastrados</h2><p>Gerencie os acessos sem alterar os links já divulgados.</p></div>
+                <span id="downline-count">0 acessos</span>
+              </div>
+              <div class="table-scroll">
+                <table class="downline-table">
+                  <thead><tr><th>Downline</th><th>Link exclusivo</th><th>Criado em</th><th>Ações</th></tr></thead>
+                  <tbody id="downline-list"></tbody>
+                </table>
+              </div>
+              <p class="muted table-empty" id="downline-empty" hidden>Nenhum downline cadastrado.</p>
+            </section>
+          </section>
         </div>
-        <div class="loading" id="loading"><span></span><p>Carregando cadastros…</p></div>
-        <div class="notice" id="dashboard-error" hidden></div>
-        <div class="empty" id="empty-state" hidden><span>📄</span><h2>Nenhum cadastro encontrado</h2><p>Os novos envios vinculados a este acesso aparecerão aqui automaticamente.</p></div>
-        <div class="submission-list" id="submission-list"></div>
       </div>
     </section>
   </main>
+
+  <dialog class="edit-dialog" id="downline-dialog">
+    <form method="dialog" class="dialog-card" id="downline-edit-form">
+      <div class="dialog-heading"><div><p class="eyebrow">Editar acesso</p><h2 id="dialog-title">Editar downline</h2></div><button type="button" class="dialog-close" data-close-dialog aria-label="Fechar">×</button></div>
+      <input type="hidden" name="slug">
+      <div class="dialog-grid">
+        <label><span>Nome</span><input name="givenName" required></label>
+        <label><span>Sobrenome</span><input name="surname" required></label>
+      </div>
+      <label><span>E-mail de acesso</span><input name="email" type="email" required></label>
+      <label><span>Nova senha</span><input name="password" type="password" minlength="8" autocomplete="new-password" placeholder="Deixe em branco para manter a senha atual"><small>Preencha somente quando desejar cadastrar uma nova senha.</small></label>
+      <div class="dialog-link"><span>Link permanente</span><strong id="dialog-link"></strong></div>
+      <p class="error" id="dialog-error" hidden></p>
+      <div class="dialog-actions"><button type="button" class="secondary" data-close-dialog>Cancelar</button><button type="submit" class="primary">Salvar alterações</button></div>
+    </form>
+  </dialog>
+
   <script type="module" src="/admin/admin.js"></script>
 </body>
 </html>

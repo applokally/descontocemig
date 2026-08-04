@@ -1,5 +1,5 @@
 import { get, list } from '@vercel/blob';
-import { normalizeSlug } from './_lib/downlines.js';
+import { isDownlineSessionActive, normalizeSlug } from './_lib/downlines.js';
 import { json, requireAdmin } from './_lib/security.js';
 
 async function readManifest(pathname) {
@@ -14,7 +14,7 @@ function belongsTo(submission, slug) {
 
 export async function GET(request) {
   const admin = requireAdmin(request);
-  if (!admin) return json({ error: 'Sessão expirada.' }, 401);
+  if (!admin || !(await isDownlineSessionActive(admin))) return json({ error: 'Sessão expirada.' }, 401);
   try {
     const { blobs } = await list({ prefix: 'manifests/', limit: 1000 });
     let submissions = (await Promise.all(blobs.map(blob => readManifest(blob.pathname)))).filter(Boolean);

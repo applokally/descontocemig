@@ -1,4 +1,4 @@
-import { createDownline, listDownlines } from './_lib/downlines.js';
+import { createDownline, deleteDownline, listDownlines, updateDownline } from './_lib/downlines.js';
 import { json, requireAdmin, sameOrigin } from './_lib/security.js';
 
 function requireOwner(request) {
@@ -11,7 +11,15 @@ function requireOwner(request) {
 }
 
 function isValidationError(message) {
-  return /^(Informe|A senha|Este link|Este e-mail)/.test(message);
+  return /^(Informe|A senha|Este link|Este e-mail|Downline não encontrado)/.test(message);
+}
+
+function errorResponse(error, action) {
+  const message = error instanceof Error ? error.message : '';
+  const validationError = isValidationError(message);
+  if (!validationError) console.error('Falha ao ' + action + ' downline:', error);
+  const status = message === 'Downline não encontrado.' ? 404 : validationError ? 400 : 500;
+  return json({ error: validationError ? message : 'Não foi possível ' + action + ' o downline.' }, status);
 }
 
 export async function GET(request) {
@@ -28,7 +36,6 @@ export async function GET(request) {
 
 export async function POST(request) {
   if (!sameOrigin(request)) return json({ error: 'Origem não autorizada.' }, 403);
-
   const session = requireOwner(request);
   if (!session.admin) return json({ error: session.error }, session.status);
 
@@ -37,12 +44,34 @@ export async function POST(request) {
     const downline = await createDownline(input);
     return json({ downline }, 201);
   } catch (error) {
-    const message = error instanceof Error ? error.message : '';
-    const validationError = isValidationError(message);
-    if (!validationError) console.error('Falha ao criar downline:', error);
-    return json(
-      { error: validationError ? message : 'Não foi possível criar o downline.' },
-      validationError ? 400 : 500
-    );
+    return errorResponse(error, 'criar');
+  }
+}
+
+export async function PATCH(request) {
+  if (!sameOrigin(request)) return json({ error: 'Origem não autorizada.' }, 403);
+  const session = requireOwner(request);
+  if (!session.admin) return json({ error: session.error }, session.status);
+
+  try {
+    const input = await request.json();
+    const downline = await updateDownline(input.slug, input);
+    return json({ downline });
+  } catch (error) {
+    return errorResponse(error, 'atualizar');
+  }
+}
+
+export async function DELETE(request) {
+  if (!sameOrigin(request)) return json({ error: 'Origem não autorizada.' }, 403);
+  const session = requireOwner(request);
+  if (!session.admin) return json({ error: session.error }, session.status);
+
+  try {
+    const slug = new URL(request.url).searchParams.get('slug');
+    const downline = await deleteDownline(slug);
+    return json({ downline });
+  } catch (error) {
+    return errorResponse(error, 'excluir');
   }
 }

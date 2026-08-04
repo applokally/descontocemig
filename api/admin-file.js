@@ -1,5 +1,5 @@
 import { get } from '@vercel/blob';
-import { normalizeSlug } from './_lib/downlines.js';
+import { isDownlineSessionActive, normalizeSlug } from './_lib/downlines.js';
 import { requireAdmin } from './_lib/security.js';
 
 async function canAccess(admin, pathname) {
@@ -14,7 +14,7 @@ async function canAccess(admin, pathname) {
 
 export async function GET(request) {
   const admin = requireAdmin(request);
-  if (!admin) return new Response('Sessão expirada.', { status: 401 });
+  if (!admin || !(await isDownlineSessionActive(admin))) return new Response('Sessão expirada.', { status: 401 });
   const url = new URL(request.url);
   const pathname = url.searchParams.get('pathname') || '';
   const requestedName = (url.searchParams.get('name') || 'arquivo').replace(/[^a-zA-Z0-9 ._()À-ÿ-]/g, '').slice(0, 160);

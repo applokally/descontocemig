@@ -7,9 +7,11 @@ const dashboardError = document.querySelector('#dashboard-error');
 const listElement = document.querySelector('#submission-list');
 const emptyState = document.querySelector('#empty-state');
 const searchInput = document.querySelector('#search-input');
-const downlinePanel = document.querySelector('#downline-panel');
 const downlineForm = document.querySelector('#downline-form');
+const downlineDialog = document.querySelector('#downline-dialog');
+const downlineEditForm = document.querySelector('#downline-edit-form');
 let submissions = [];
+let downlines = [];
 let currentSession = null;
 
 async function api(url, options = {}) {
@@ -104,7 +106,7 @@ function render(items) {
           detail('Downline / link', item.affiliateSlug || h.consultant || 'Direto') +
           detail('Recebido em', displayDate(item.createdAt)) +
         '</div>' +
-        (simulation ? '<h3 class="files-title">Simulação de origem</h3><div class="detail-grid simulation-grid">' + simulation + '</div>' : '') +
+        '<h3 class="files-title">Simulação de origem</h3><div class="detail-grid simulation-grid">' + simulation + '</div>' +
         '<h3 class="files-title">Documentos protegidos</h3>' +
         '<div class="files">' + documents + '</div>' +
       '</div>' +
@@ -146,20 +148,43 @@ async function loadSubmissions() {
   }
 }
 
+function initials(item) {
+  return ((item.givenName?.[0] || '') + (item.surname?.[0] || '')).toUpperCase() || 'D';
+}
+
 function downlineMarkup(item) {
   const link = location.origin + '/' + item.slug;
-  return '<article class="downline-row"><div><strong>' + escapeHtml(item.givenName + ' ' + item.surname) + '</strong><span>' + escapeHtml(item.email) + '</span><a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">' + escapeHtml(link) + '</a></div><button type="button" data-copy="' + escapeHtml(link) + '">Copiar link</button></article>';
+  return '<tr>' +
+    '<td><div class="person-cell"><span class="profile-avatar">' + escapeHtml(initials(item)) + '</span><div><strong>' + escapeHtml(item.givenName + ' ' + item.surname) + '</strong><span>' + escapeHtml(item.email) + '</span></div></div></td>' +
+    '<td class="link-cell"><a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">' + escapeHtml(link) + '</a><button type="button" data-copy="' + escapeHtml(link) + '">Copiar link</button></td>' +
+    '<td>' + escapeHtml(displayDate(item.createdAt)) + '</td>' +
+    '<td><div class="row-actions"><a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">Visualizar</a><button type="button" data-edit-downline="' + escapeHtml(item.slug) + '">Editar</button><button type="button" class="danger" data-delete-downline="' + escapeHtml(item.slug) + '">Excluir</button></div></td>' +
+  '</tr>';
 }
 
 async function loadDownlines() {
   if (currentSession?.role !== 'owner') return;
   const list = document.querySelector('#downline-list');
+  const empty = document.querySelector('#downline-empty');
   try {
     const data = await api('/api/admin-downlines');
-    list.innerHTML = (data.downlines || []).map(downlineMarkup).join('') || '<p class="muted">Nenhum downline cadastrado.</p>';
+    downlines = data.downlines || [];
+    list.innerHTML = downlines.map(downlineMarkup).join('');
+    empty.hidden = downlines.length !== 0;
+    document.querySelector('#downline-count').textContent = downlines.length + (downlines.length === 1 ? ' acesso' : ' acessos');
   } catch (error) {
-    list.innerHTML = '<p class="error">' + escapeHtml(error.message) + '</p>';
+    list.innerHTML = '<tr><td colspan="4"><p class="error">' + escapeHtml(error.message) + '</p></td></tr>';
+    empty.hidden = true;
   }
+}
+
+function setView(name) {
+  if (name === 'downlines' && currentSession?.role !== 'owner') name = 'accounts';
+  document.querySelector('#accounts-view').hidden = name !== 'accounts';
+  document.querySelector('#downlines-view').hidden = name !== 'downlines';
+  document.querySelectorAll('[data-view-target]').forEach(button => button.classList.toggle('is-active', button.dataset.viewTarget === name));
+  dashboard.classList.remove('is-menu-open');
+  if (name === 'downlines') loadDownlines();
 }
 
 function showDashboard(session) {
@@ -167,11 +192,14 @@ function showDashboard(session) {
   loginView.hidden = true;
   dashboard.hidden = false;
   const owner = session.role === 'owner';
-  document.querySelector('#admin-identity').textContent = session.name || session.email;
+  const identity = session.name || session.email;
+  document.querySelector('#admin-identity').textContent = identity;
   document.querySelector('#admin-role').textContent = owner ? 'Administrador principal' : 'Downline';
+  document.querySelector('#mobile-role').textContent = owner ? 'Administrador' : 'Downline';
+  document.querySelector('#profile-avatar').textContent = identity.trim().charAt(0).toUpperCase() || 'A';
   document.querySelector('#area-label').textContent = owner ? 'Visão geral da operação' : 'Área do downline';
-  document.querySelector('#scope-message').textContent = owner ? 'Você visualiza todos os cadastros e gerencia os acessos da rede.' : 'Você visualiza somente os cadastros realizados pelo seu link.';
-  downlinePanel.hidden = !owner;
+  document.querySelector('#scope-message').textContent = owner ? 'Você visualiza todas as contas recebidas e gerencia os acessos da rede.' : 'Você visualiza somente as contas realizadas pelo seu link.';
+  document.querySelector('#downlines-nav').hidden = !owner;
   const affiliateCard = document.querySelector('#affiliate-card');
   affiliateCard.hidden = owner;
   if (!owner && session.slug) {
@@ -179,6 +207,7 @@ function showDashboard(session) {
     document.querySelector('#affiliate-link').textContent = link;
     document.querySelector('#copy-affiliate-link').dataset.copy = link;
   }
+  setView('accounts');
   if (owner) loadDownlines();
   loadSubmissions();
 }
@@ -187,6 +216,28 @@ function showLogin() {
   currentSession = null;
   dashboard.hidden = true;
   loginView.hidden = false;
+  if (downlineDialog.open) downlineDialog.close();
+}
+
+function openDownlineEditor(slug) {
+  const item = downlines.find(downline => downline.slug === slug);
+  if (!item) return;
+  downlineEditForm.elements.slug.value = item.slug;
+  downlineEditForm.elements.givenName.value = item.givenName;
+  downlineEditForm.elements.surname.value = item.surname;
+  downlineEditForm.elements.email.value = item.email;
+  downlineEditForm.elements.password.value = '';
+  document.querySelector('#dialog-title').textContent = item.givenName + ' ' + item.surname;
+  document.querySelector('#dialog-link').textContent = location.origin + '/' + item.slug;
+  document.querySelector('#dialog-error').hidden = true;
+  downlineDialog.showModal();
+}
+
+function showDownlineNotice(message) {
+  const element = document.querySelector('#downline-success');
+  element.textContent = message;
+  element.hidden = false;
+  window.setTimeout(() => { element.hidden = true; }, 4500);
 }
 
 loginForm.addEventListener('submit', async event => {
@@ -213,16 +264,13 @@ downlineForm.addEventListener('submit', async event => {
   event.preventDefault();
   const button = downlineForm.querySelector('button');
   const errorElement = document.querySelector('#downline-error');
-  const successElement = document.querySelector('#downline-success');
   errorElement.hidden = true;
-  successElement.hidden = true;
+  document.querySelector('#downline-success').hidden = true;
   button.disabled = true;
   button.textContent = 'Criando…';
   try {
     const data = await api('/api/admin-downlines', { method: 'POST', body: JSON.stringify(Object.fromEntries(new FormData(downlineForm))) });
-    const link = location.origin + '/' + data.downline.slug;
-    successElement.innerHTML = 'Downline criado. Link exclusivo: <a href="' + escapeHtml(link) + '" target="_blank" rel="noopener">' + escapeHtml(link) + '</a>';
-    successElement.hidden = false;
+    showDownlineNotice('Downline criado: ' + location.origin + '/' + data.downline.slug);
     downlineForm.reset();
     await loadDownlines();
   } catch (error) {
@@ -234,28 +282,77 @@ downlineForm.addEventListener('submit', async event => {
   }
 });
 
-document.addEventListener('click', async event => {
-  const button = event.target.closest('[data-copy]');
-  if (!button) return;
-  const original = button.textContent;
+downlineEditForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  const button = downlineEditForm.querySelector('.primary');
+  const errorElement = document.querySelector('#dialog-error');
+  errorElement.hidden = true;
+  button.disabled = true;
+  button.textContent = 'Salvando…';
   try {
-    await navigator.clipboard.writeText(button.dataset.copy);
-    button.textContent = 'Copiado!';
-  } catch {
-    button.textContent = 'Copie pelo link';
+    const payload = Object.fromEntries(new FormData(downlineEditForm));
+    await api('/api/admin-downlines', { method: 'PATCH', body: JSON.stringify(payload) });
+    downlineDialog.close();
+    showDownlineNotice(payload.password ? 'Dados e nova senha salvos.' : 'Dados do downline atualizados.');
+    await loadDownlines();
+  } catch (error) {
+    errorElement.textContent = error.message;
+    errorElement.hidden = false;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Salvar alterações';
   }
-  setTimeout(() => { button.textContent = original; }, 1600);
 });
+
+document.addEventListener('click', async event => {
+  const navigation = event.target.closest('[data-view-target]');
+  if (navigation) return setView(navigation.dataset.viewTarget);
+
+  const copyButton = event.target.closest('[data-copy]');
+  if (copyButton) {
+    const original = copyButton.textContent;
+    try {
+      await navigator.clipboard.writeText(copyButton.dataset.copy);
+      copyButton.textContent = 'Copiado!';
+    } catch {
+      copyButton.textContent = 'Copie pelo link';
+    }
+    window.setTimeout(() => { copyButton.textContent = original; }, 1600);
+    return;
+  }
+
+  const editButton = event.target.closest('[data-edit-downline]');
+  if (editButton) return openDownlineEditor(editButton.dataset.editDownline);
+
+  const deleteButton = event.target.closest('[data-delete-downline]');
+  if (deleteButton) {
+    const item = downlines.find(downline => downline.slug === deleteButton.dataset.deleteDownline);
+    if (!item || !window.confirm('Excluir o acesso de ' + item.givenName + ' ' + item.surname + '? As contas já recebidas serão preservadas.')) return;
+    deleteButton.disabled = true;
+    try {
+      await api('/api/admin-downlines?slug=' + encodeURIComponent(item.slug), { method: 'DELETE' });
+      showDownlineNotice('Acesso excluído. As contas recebidas foram preservadas.');
+      await loadDownlines();
+    } catch (error) {
+      window.alert(error.message);
+      deleteButton.disabled = false;
+    }
+  }
+});
+
+document.querySelectorAll('[data-close-dialog]').forEach(button => button.addEventListener('click', () => downlineDialog.close()));
+downlineDialog.addEventListener('click', event => { if (event.target === downlineDialog) downlineDialog.close(); });
+document.querySelector('#sidebar-open').addEventListener('click', () => dashboard.classList.add('is-menu-open'));
+document.querySelector('#sidebar-close').addEventListener('click', () => dashboard.classList.remove('is-menu-open'));
+document.querySelector('#sidebar-backdrop').addEventListener('click', () => dashboard.classList.remove('is-menu-open'));
 
 document.querySelector('#logout-button').addEventListener('click', async () => {
   await api('/api/admin-logout', { method: 'POST' }).catch(() => {});
   showLogin();
 });
 
-document.querySelector('#refresh-button').addEventListener('click', () => {
-  loadSubmissions();
-  loadDownlines();
-});
+document.querySelector('#refresh-button').addEventListener('click', loadSubmissions);
+document.querySelector('#refresh-downlines').addEventListener('click', loadDownlines);
 
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
