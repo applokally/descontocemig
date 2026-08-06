@@ -84,6 +84,9 @@ function render(items) {
       fileLink(files.documentBack, 'Verso do documento'),
       fileLink(files.cemigBill || files.energyBill, 'Conta de energia')
     ].filter(Boolean).join('');
+    const deleteAction = currentSession?.role === 'owner'
+      ? '<div class="submission-actions"><button type="button" class="delete-submission" data-delete-submission="' + escapeHtml(item.id) + '">Excluir cadastro</button></div>'
+      : '';
     return '<article class="submission">' +
       '<button class="submission__summary" type="button" aria-expanded="false">' +
         '<span class="submission__person"><strong>' + escapeHtml(fullName || 'Cadastro sem nome') + '</strong><span>' + escapeHtml(h.email) + '</span></span>' +
@@ -109,6 +112,7 @@ function render(items) {
         '<h3 class="files-title">Simulação de origem</h3><div class="detail-grid simulation-grid">' + simulation + '</div>' +
         '<h3 class="files-title">Documentos protegidos</h3>' +
         '<div class="files">' + documents + '</div>' +
+        deleteAction +
       '</div>' +
     '</article>';
   }).join('');
@@ -323,6 +327,29 @@ document.addEventListener('click', async event => {
 
   const editButton = event.target.closest('[data-edit-downline]');
   if (editButton) return openDownlineEditor(editButton.dataset.editDownline);
+
+  const submissionDeleteButton = event.target.closest('[data-delete-submission]');
+  if (submissionDeleteButton) {
+    const item = submissions.find(submission => submission.id === submissionDeleteButton.dataset.deleteSubmission);
+    const name = [item?.holder?.givenName, item?.holder?.surname].filter(Boolean).join(' ') || 'este cliente';
+    if (!item || !window.confirm('Excluir permanentemente o cadastro de ' + name + '? Todos os dados e documentos enviados serão apagados e não poderão ser recuperados.')) return;
+
+    const original = submissionDeleteButton.textContent;
+    submissionDeleteButton.disabled = true;
+    submissionDeleteButton.textContent = 'Excluindo…';
+    try {
+      await api('/api/admin-submissions?id=' + encodeURIComponent(item.id), { method: 'DELETE' });
+      submissions = submissions.filter(submission => submission.id !== item.id);
+      updateMetrics();
+      searchInput.dispatchEvent(new Event('input'));
+      window.alert('Cadastro e documentos excluídos com sucesso.');
+    } catch (error) {
+      window.alert(error.message);
+      submissionDeleteButton.disabled = false;
+      submissionDeleteButton.textContent = original;
+    }
+    return;
+  }
 
   const deleteButton = event.target.closest('[data-delete-downline]');
   if (deleteButton) {
